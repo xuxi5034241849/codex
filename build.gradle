@@ -1,0 +1,67 @@
+group 'org.xuxi.codex'
+version '1.0.0'
+
+buildscript {
+    ext {
+        springBootVersion = '2.0.4.RELEASE'
+    }
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+
+
+    }
+}
+
+
+def vJavaLang = '1.8'
+def javaProjects = [ project(':codex-core'), project(':codex-db') ]
+def bootProjects = javaProjects - project(':codex-db')
+
+
+configure(javaProjects) {
+
+    apply plugin: 'java'
+    apply plugin: "io.spring.dependency-management"
+
+    targetCompatibility = vJavaLang
+    sourceCompatibility = vJavaLang
+
+    repositories {
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+    }
+
+    afterEvaluate {
+        dependencyManagement {
+            imports {
+                mavenBom('io.spring.platform:platform-bom:Brussels-SR5') {
+                    bomProperties([
+                            'elasticsearch.version': '1.7.1' // see io.searchbox:jest
+                    ])
+                }
+                mavenBom("org.springframework.cloud:spring-cloud-dependencies:Dalston.SR3")
+            }
+        }
+    }
+
+    dependencies {
+
+        compile('org.springframework.boot:spring-boot-starter-web')
+        compile('org.springframework.boot:spring-boot-devtools')
+
+        compile("com.alibaba:fastjson:1.2.31")
+        compile("commons-lang:commons-lang:2.6")
+        compile("commons-io:commons-io:2.5")
+        compile("commons-configuration:commons-configuration:1.10")
+        compile("org.projectlombok:lombok:1.18.2")
+
+    }
+
+
+}
+
+configure(bootProjects) {
+    apply plugin: 'org.springframework.boot'
+}

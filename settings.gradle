@@ -1,0 +1,4 @@
+rootProject.name = 'codex'
+include 'codex-db'
+include 'codex-core'
+
