@@ -1,4 +1,7 @@
 rootProject.name = 'codex'
 include 'codex-db'
 include 'codex-core'
+include 'codex-common'
+include 'codex-stream'
+include 'codex-context'
 

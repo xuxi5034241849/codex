@@ -10,21 +10,23 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-
-
     }
 }
 
 
 def vJavaLang = '1.8'
-def javaProjects = [ project(':codex-core'), project(':codex-db') ]
-def bootProjects = javaProjects - project(':codex-db')
+def javaProjects = [project(':codex-core'), project(':codex-db'), project(':codex-common'),
+                    project(':codex-stream'), project(':codex-context')]
+def bootProjects = [project(':codex-core')]
+
 
 
 configure(javaProjects) {
 
     apply plugin: 'java'
+    apply plugin: 'idea'
     apply plugin: "io.spring.dependency-management"
+
 
     targetCompatibility = vJavaLang
     sourceCompatibility = vJavaLang
@@ -33,23 +35,15 @@ configure(javaProjects) {
         maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
     }
 
-    afterEvaluate {
-        dependencyManagement {
-            imports {
-                mavenBom('io.spring.platform:platform-bom:Brussels-SR5') {
-                    bomProperties([
-                            'elasticsearch.version': '1.7.1' // see io.searchbox:jest
-                    ])
-                }
-                mavenBom("org.springframework.cloud:spring-cloud-dependencies:Dalston.SR3")
-            }
+    dependencyManagement {
+        imports {
+            mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
         }
     }
 
     dependencies {
-
         compile('org.springframework.boot:spring-boot-starter-web')
-        compile('org.springframework.boot:spring-boot-devtools')
+//        compile('org.springframework.boot:spring-boot-devtools')
 
         compile("com.alibaba:fastjson:1.2.31")
         compile("commons-lang:commons-lang:2.6")
@@ -58,8 +52,6 @@ configure(javaProjects) {
         compile("org.projectlombok:lombok:1.18.2")
 
     }
-
-
 }
 
 configure(bootProjects) {

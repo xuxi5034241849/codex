@@ -1,7 +1,7 @@
 
 dependencies {
     compile project(":codex-db")
-    compile project(":codex-common")
-    compile project(":codex-stream")
     compile project(":codex-context")
+    compile project(":codex-common")
+
 }

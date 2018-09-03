@@ -1,5 +1,9 @@
 server:
   port: 8066
+  tomcat:
+    max-threads: 30
+    min-spare-threads: 20
+
 
 spring:
     datasource:
@@ -39,3 +43,4 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     cache-enabled: false
     call-setters-on-nulls: true
+
