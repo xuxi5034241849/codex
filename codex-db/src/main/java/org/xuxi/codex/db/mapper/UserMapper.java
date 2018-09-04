@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * 
  * @author xuxi
  * @email 461720498@qq.com
- * @date 2018-09-03 16:54:09
+ * @date 2018-09-04 14:47:23
  */
 public interface UserMapper extends BaseMapper<UserEntity> {
 	

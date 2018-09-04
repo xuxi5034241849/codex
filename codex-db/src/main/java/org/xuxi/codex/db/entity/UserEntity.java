@@ -2,10 +2,7 @@ package org.xuxi.codex.db.entity;
 
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
-import org.xuxi.codex.common.valid.ValidGroup;
-import org.xuxi.codex.common.valid.ValidateMessage;
 
-import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 /**
@@ -13,7 +10,7 @@ import java.io.Serializable;
  * 
  * @author xuxi
  * @email 461720498@qq.com
- * @date 2018-09-03 16:54:09
+ * @date 2018-09-04 14:47:23
  */
 @TableName("user")
 public class UserEntity implements Serializable {
@@ -23,16 +20,14 @@ public class UserEntity implements Serializable {
 	 * id
 	 */
 	@TableId
-	private Integer id;
+	private Long id;
 	/**
 	 * 用户名
 	 */
-	@NotBlank(groups = ValidGroup.Login.class)
 	private String userName;
 	/**
 	 * 密码
 	 */
-	@NotBlank(groups = ValidGroup.Login.class)
 	private String password;
 	/**
 	 * 姓名
@@ -47,6 +42,14 @@ public class UserEntity implements Serializable {
 	 */
 	private String telephone;
 	/**
+	 * 扰乱码
+	 */
+	private String salt;
+	/**
+	 * 是否是管理员： 0：管理员 2：用户
+	 */
+	private Integer type;
+	/**
 	 * 创建时间
 	 */
 	private Integer createTime;
@@ -58,13 +61,13 @@ public class UserEntity implements Serializable {
 	/**
 	 * 设置：id
 	 */
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	/**
 	 * 获取：id
 	 */
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 	/**
@@ -126,6 +129,30 @@ public class UserEntity implements Serializable {
 	 */
 	public String getTelephone() {
 		return telephone;
+	}
+	/**
+	 * 设置：扰乱码
+	 */
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
+	/**
+	 * 获取：扰乱码
+	 */
+	public String getSalt() {
+		return salt;
+	}
+	/**
+	 * 设置：是否是管理员： 0：管理员 2：用户
+	 */
+	public void setType(Integer type) {
+		this.type = type;
+	}
+	/**
+	 * 获取：是否是管理员： 0：管理员 2：用户
+	 */
+	public Integer getType() {
+		return type;
 	}
 	/**
 	 * 设置：创建时间

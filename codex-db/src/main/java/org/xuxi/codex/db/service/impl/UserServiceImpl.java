@@ -11,6 +11,11 @@ import org.xuxi.codex.db.service.UserService;
 public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> implements UserService {
 
 
+
+//        /*sha256加密、设置操作员的密码*/
+//        String salt = RandomStringUtils.randomAlphanumeric(20);
+
+
     @Override
     public UserEntity getUserByName(String userName) {
 

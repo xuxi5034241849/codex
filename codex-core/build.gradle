@@ -4,6 +4,6 @@ dependencies {
     compile project(":codex-common")
     compile project(":codex-stream")
     compile project(":codex-context")
-    compile project(":codex-shiro")
+//    compile project(":codex-shiro")
 
 }

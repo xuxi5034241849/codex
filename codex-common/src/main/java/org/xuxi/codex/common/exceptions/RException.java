@@ -6,8 +6,8 @@ package org.xuxi.codex.common.exceptions;
 public class RException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
-    private String msg;
     private String code;
+    private String msg;
 
     public RException(String msg) {
         super(msg);
@@ -21,14 +21,20 @@ public class RException extends RuntimeException {
 
     public RException(String msg, String code) {
         super(msg);
-        this.msg = msg;
         this.code = code;
+        this.msg = msg;
     }
 
     public RException(String msg, String code, Throwable e) {
         super(msg, e);
-        this.msg = msg;
         this.code = code;
+        this.msg = msg;
+    }
+
+    public RException(CodeDefined codeDefined) {
+        super(codeDefined.getDesc());
+        this.code = codeDefined.getValue();
+        this.msg = codeDefined.getDesc();
     }
 
     public String getMsg() {
@@ -46,6 +52,5 @@ public class RException extends RuntimeException {
     public void setCode(String code) {
         this.code = code;
     }
-
 
 }

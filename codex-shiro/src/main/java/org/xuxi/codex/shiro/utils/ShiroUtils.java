@@ -13,7 +13,7 @@
  * the License.
  */
 
-package org.xuxi.codex.shiro;
+package org.xuxi.codex.shiro.utils;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.SimpleHash;

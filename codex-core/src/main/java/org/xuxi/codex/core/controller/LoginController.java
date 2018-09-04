@@ -1,11 +1,7 @@
 package org.xuxi.codex.core.controller;
 
 
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.subject.Subject;
-import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,26 +10,32 @@ import org.springframework.web.bind.annotation.RestController;
 import org.xuxi.codex.common.utils.R;
 import org.xuxi.codex.common.valid.ValidGroup;
 import org.xuxi.codex.db.entity.UserEntity;
-import org.xuxi.codex.shiro.ShiroUtils;
+import org.xuxi.codex.db.service.UserService;
+import org.xuxi.codex.shiro.token.TokenService;
+import org.xuxi.codex.shiro.utils.ShiroUtils;
 
 
 @RestController
 public class LoginController {
 
-    @PostMapping("/login")
-    public R login(@RequestBody  @Validated(ValidGroup.Login.class) UserEntity userEntity) {
+    @Autowired
+    private TokenService tokenService;
 
-        try {
-            Subject subject = ShiroUtils.getSubject();
-            UsernamePasswordToken token = new UsernamePasswordToken(userEntity.getUserName(), userEntity.getPassword());
-            subject.login(token);
-        } catch (UnknownAccountException e) {
-            return R.error(e.getMessage());
-        } catch (IncorrectCredentialsException e) {
-            return R.error("登录名或密码不正确!");
+    @Autowired
+    private UserService userService;
+
+    @PostMapping("/login")
+    public R login(@RequestBody @Validated(ValidGroup.Login.class) UserEntity userEntity) {
+
+
+        UserEntity user = userService.getUserByName(userEntity.getUserName());
+
+        //账号不存在、密码错误
+        if (user == null || !user.getPassword().equals(ShiroUtils.sha256(userEntity.getPassword(), user.getSalt()))) {
+            return R.error("账号或密码不正确");
         }
 
-        return R.ok();
+        return R.ok().put("token", tokenService.createToken(user.getId()));
     }
 
 
