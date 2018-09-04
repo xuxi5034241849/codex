@@ -2,9 +2,11 @@ package org.xuxi.codex.stream.template;
 
 import org.springframework.stereotype.Component;
 import org.xuxi.codex.context.PropertiesContext;
+import org.xuxi.codex.db.entity.ColumnEntity;
 import org.xuxi.codex.stream.TableCodexTemplate;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -28,6 +30,8 @@ public class EntityTemplate extends TableCodexTemplate {
         String comments = tableEntity.getComments();
         String tableName = tableEntity.getTableName();
         String className = tableEntity.getClassName();
+        ColumnEntity pk = tableEntity.getPk();
+        List<ColumnEntity> columns = tableEntity.getColumns();
 
 
         //封装模板数据
@@ -39,7 +43,9 @@ public class EntityTemplate extends TableCodexTemplate {
         map.put("comments", comments);
         map.put("tableName", tableName);
         map.put("className", className);
-        setTemplate(TEMPLATE_NAME, map, buildFilePath(TEMPLATE_NAME, className,
+        map.put("columns", columns);
+        map.put("pk", pk);
+        buildTemplate(TEMPLATE_NAME, map, buildFilePath(TEMPLATE_NAME, className,
                 entityPackagePath, false));
     }
 

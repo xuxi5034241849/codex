@@ -30,7 +30,7 @@ public class SysGeneratorController {
 
         byte[] data = tableCodexTemplateStream.doTemplate(tableName);
         response.reset();
-        response.setHeader("Content-Disposition", "attachment; filename=\"codex.zip\"");
+        response.setHeader("Content-Disposition", "attachment; filename=\"" + tableName+".zip\"");
         response.addHeader("Content-Length", "" + data.length);
         response.setContentType("application/octet-stream; charset=UTF-8");
         IOUtils.write(data, response.getOutputStream());

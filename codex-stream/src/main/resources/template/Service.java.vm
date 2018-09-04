@@ -3,7 +3,6 @@ package ${servicePackagePath};
 import com.baomidou.mybatisplus.service.IService;
 import ${entityPackagePath}.${className}Entity;
 
-import java.util.Map;
 
 /**
  * ${comments}

@@ -40,7 +40,7 @@ public class MapperTemplate extends TableCodexTemplate {
         map.put("datetime", datetime);
         map.put("comments", comments);
         map.put("className", className);
-        setTemplate(TEMPLATE_NAME, map, buildFilePath(TEMPLATE_NAME, className,
+        buildTemplate(TEMPLATE_NAME, map, buildFilePath(TEMPLATE_NAME, className,
                 mapperPackagePath, false));
     }
 }

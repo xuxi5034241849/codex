@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Mapper类coding 模板
+ * Service类coding 模板
  */
 @Component
 public class ServiceTemplate extends TableCodexTemplate {
@@ -34,13 +34,13 @@ public class ServiceTemplate extends TableCodexTemplate {
         //封装模板数据
         Map<String, Object> map = new HashMap<>();
         map.put("servicePackagePath", servicePackagePath);
-        map.put("entityPackagePath", servicePackagePath);
+        map.put("entityPackagePath", entityPackagePath);
         map.put("author", author);
         map.put("email", email);
         map.put("datetime", datetime);
         map.put("comments", comments);
         map.put("className", className);
-        setTemplate(TEMPLATE_NAME, map, buildFilePath(TEMPLATE_NAME, className,
+        buildTemplate(TEMPLATE_NAME, map, buildFilePath(TEMPLATE_NAME, className,
                 servicePackagePath, false));
     }
 }

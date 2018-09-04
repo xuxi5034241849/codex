@@ -4,4 +4,5 @@ include 'codex-core'
 include 'codex-common'
 include 'codex-stream'
 include 'codex-context'
+include 'codex-shiro'
 

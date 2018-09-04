@@ -2,14 +2,15 @@ package org.xuxi.codex.stream.template;
 
 import org.springframework.stereotype.Component;
 import org.xuxi.codex.context.PropertiesContext;
+import org.xuxi.codex.db.entity.ColumnEntity;
 import org.xuxi.codex.stream.TableCodexTemplate;
 
-import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
- * Mapper类coding 模板
+ * Mapper XML coding 模板
  */
 @Component
 public class MapperXmlTemplate extends TableCodexTemplate {
@@ -28,6 +29,7 @@ public class MapperXmlTemplate extends TableCodexTemplate {
         String comments = tableEntity.getComments();
         String className = tableEntity.getClassName();
         String classname = tableEntity.getClassname();
+        List<ColumnEntity> columns = tableEntity.getColumns();
 
 
         //封装模板数据
@@ -37,7 +39,8 @@ public class MapperXmlTemplate extends TableCodexTemplate {
         map.put("comments", comments);
         map.put("className", className);
         map.put("classname", classname);
-        setTemplate(TEMPLATE_NAME, map, buildFilePath(TEMPLATE_NAME, className,
+        map.put("columns", columns);
+        buildTemplate(TEMPLATE_NAME, map, buildFilePath(TEMPLATE_NAME, className,
                 propertiesContext.getValue("mapperXmlPackagePath"), true));
     }
 

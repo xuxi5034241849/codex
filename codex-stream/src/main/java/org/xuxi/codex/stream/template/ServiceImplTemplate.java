@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Mapper类coding 模板
+ * ServiceImpl类coding 模板
  */
 @Component
 public class ServiceImplTemplate extends TableCodexTemplate {
@@ -44,7 +44,7 @@ public class ServiceImplTemplate extends TableCodexTemplate {
         map.put("comments", comments);
         map.put("className", className);
         map.put("classname", classname);
-        setTemplate(TEMPLATE_NAME, map, buildFilePath(TEMPLATE_NAME, className,
+        buildTemplate(TEMPLATE_NAME, map, buildFilePath(TEMPLATE_NAME, className,
                 propertiesContext.getValue("serviceImplPackagePath"), false));
     }
 }

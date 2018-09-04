@@ -16,7 +16,7 @@ buildscript {
 
 def vJavaLang = '1.8'
 def javaProjects = [project(':codex-core'), project(':codex-db'), project(':codex-common'),
-                    project(':codex-stream'), project(':codex-context')]
+                    project(':codex-stream'), project(':codex-context'), project('codex-shiro')]
 def bootProjects = [project(':codex-core')]
 
 
@@ -43,14 +43,13 @@ configure(javaProjects) {
 
     dependencies {
         compile('org.springframework.boot:spring-boot-starter-web')
-//        compile('org.springframework.boot:spring-boot-devtools')
+        compile('org.springframework.boot:spring-boot-devtools')
 
         compile("com.alibaba:fastjson:1.2.31")
         compile("commons-lang:commons-lang:2.6")
         compile("commons-io:commons-io:2.5")
         compile("commons-configuration:commons-configuration:1.10")
         compile("org.projectlombok:lombok:1.18.2")
-
     }
 }
 
