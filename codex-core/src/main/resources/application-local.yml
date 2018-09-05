@@ -1,0 +1,26 @@
+spring:
+  datasource:
+      type: com.alibaba.druid.pool.DruidDataSource
+      driverClassName: com.mysql.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/generator?useSSL=false
+      username: root
+      password: 5034241849
+  redis:
+    port: 6379
+    host: localhost
+    password:
+    database: 3
+    timeout: 1s
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 50
+        min-idle: 0
+        max-wait: -1ms
+
+logging:
+  level: debug
+  level.org.xuxi.codex: debug
+
+shiro:
+  enabled: true

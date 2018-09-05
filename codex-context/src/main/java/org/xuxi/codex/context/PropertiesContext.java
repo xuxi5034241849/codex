@@ -58,10 +58,10 @@ public class PropertiesContext {
      */
     private PropertiesContext() {
         this.propertiesMap = new LinkedHashMap();
-        this.propertiesMap.put("entityPackagePath", "org.xuxi.codex.db.entity");
-        this.propertiesMap.put("mapperPackagePath", "org.xuxi.codex.db.mapper");
-        this.propertiesMap.put("servicePackagePath", "org.xuxi.codex.db.service");
-        this.propertiesMap.put("serviceImplPackagePath", "org.xuxi.codex.db.service.impl");
+        this.propertiesMap.put("entityPackagePath", "com.wonders.iron.db.entity");
+        this.propertiesMap.put("mapperPackagePath", "com.wonders.iron.db.mapper");
+        this.propertiesMap.put("servicePackagePath", "com.wonders.iron.db.service");
+        this.propertiesMap.put("serviceImplPackagePath", "com.wonders.iron.db.service.impl");
         this.propertiesMap.put("mapperXmlPackagePath", "mapper");
         this.propertiesMap.put("email", "461720498@qq.com");
         this.propertiesMap.put("datetime", DateUtils.format(new Date(), DateUtils.DATE_TIME_PATTERN) );

@@ -24,8 +24,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.xuxi.codex.db.entity.UserEntity;
-import org.xuxi.codex.db.service.UserService;
-import org.xuxi.codex.shiro.token.TokenEntity;
+import org.xuxi.codex.shiro.token.UserContextInfo;
 import org.xuxi.codex.shiro.token.TokenService;
 
 /**
@@ -49,15 +48,14 @@ public class OAuth2Realm extends AuthorizingRealm {
         String accessToken = (String) token.getPrincipal();
 
         //根据accessToken，查询用户信息
-        TokenEntity tokenEntity = tokenService.getTokenEntity(accessToken);
-
+        UserContextInfo userContextInfo = tokenService.getTokenEntity(accessToken);
 
         //token失效
-        if(tokenEntity == null){
+        if(userContextInfo == null){
             throw new IncorrectCredentialsException("token失效，请重新登录");
         }
 
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(tokenEntity, accessToken, getName());
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(userContextInfo, accessToken, getName());
         return info;
     }
 

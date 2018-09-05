@@ -5,6 +5,7 @@ import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.xuxi.codex.shiro.OAuth2Filter;
@@ -15,8 +16,14 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import static org.xuxi.codex.shiro.config.ShiroConfiguration.PREFIX;
+
+
 @Configuration
+@ConditionalOnProperty(prefix = PREFIX, name = "enabled", havingValue = "true")
 public class ShiroConfiguration {
+
+    public final static String PREFIX = "shiro";
 
 
     @Bean

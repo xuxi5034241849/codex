@@ -46,7 +46,7 @@ configure(javaProjects) {
         compile('org.springframework.boot:spring-boot-devtools')
 
         compile("com.alibaba:fastjson:1.2.31")
-        compile("commons-lang:commons-lang:2.6")
+        compile ("org.apache.commons:commons-lang3:3.5")
         compile("commons-io:commons-io:2.5")
         compile("commons-configuration:commons-configuration:1.10")
         compile("org.projectlombok:lombok:1.18.2")

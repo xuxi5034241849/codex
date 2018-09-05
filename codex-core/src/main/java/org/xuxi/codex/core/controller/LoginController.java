@@ -16,7 +16,7 @@ import org.xuxi.codex.shiro.utils.ShiroUtils;
 
 
 @RestController
-public class LoginController {
+public class LoginController extends AbstractController {
 
     @Autowired
     private TokenService tokenService;
@@ -43,6 +43,8 @@ public class LoginController {
     @ResponseBody
     public R out() {
 
+
+        System.out.println(getUser());
 
         return R.ok();
     }

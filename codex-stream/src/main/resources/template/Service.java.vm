@@ -11,7 +11,7 @@ import ${entityPackagePath}.${className}Entity;
  * @email ${email}
  * @date ${datetime}
  */
-public interface I${className}Service extends IService<${className}Entity> {
+public interface ${className}Service extends IService<${className}Entity> {
 
 }
 

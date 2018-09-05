@@ -32,17 +32,17 @@ public class TokenService {
         String token = TokenGenerator.generateValue();
 
         //判断是否生成过token
-        TokenEntity tokenEntity = getReidsToken(token);
-        if (tokenEntity == null) {
+        UserContextInfo userContextInfo = getReidsToken(token);
+        if (userContextInfo == null) {
             //保存token
-            tokenEntity = new TokenEntity();
-            tokenEntity.setUserId(userId);
-            tokenEntity.setToken(token);
-            setReidsToken(token, tokenEntity);
+            userContextInfo = new UserContextInfo();
+            userContextInfo.setUserId(userId);
+            userContextInfo.setToken(token);
+            setReidsToken(token, userContextInfo);
         } else {
             //更新token
-            tokenEntity.setToken(token);
-            setReidsToken(token, tokenEntity);
+            userContextInfo.setToken(token);
+            setReidsToken(token, userContextInfo);
         }
 
 
@@ -51,14 +51,14 @@ public class TokenService {
 
 
     /**
-     * Token 根据token获取 TokenEntity
+     * Token 根据token获取 UserContextInfo
      *
      * @param token
      * @return
      */
-    public TokenEntity getTokenEntity(String token) {
-        TokenEntity tokenEntity = getReidsToken(token);
-        return tokenEntity;
+    public UserContextInfo getTokenEntity(String token) {
+        UserContextInfo userContextInfo = getReidsToken(token);
+        return userContextInfo;
     }
 
 
@@ -68,8 +68,8 @@ public class TokenService {
      * @param token
      * @return
      */
-    private TokenEntity getReidsToken(String token) {
-        return (TokenEntity) redisTemplate.opsForValue().get(PREFIX + token);
+    private UserContextInfo getReidsToken(String token) {
+        return (UserContextInfo) redisTemplate.opsForValue().get(PREFIX + token);
     }
 
 
@@ -77,10 +77,10 @@ public class TokenService {
      * redise设置token
      *
      * @param token
-     * @param tokenEntity
+     * @param userContextInfo
      */
-    private void setReidsToken(String token, TokenEntity tokenEntity) {
-        redisTemplate.opsForValue().set(PREFIX + token, tokenEntity);
+    private void setReidsToken(String token, UserContextInfo userContextInfo) {
+        redisTemplate.opsForValue().set(PREFIX + token, userContextInfo);
         //60分钟过期
         redisTemplate.expire(PREFIX + token, EXPIRE, TimeUnit.MINUTES);
     }
