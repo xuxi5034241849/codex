@@ -23,6 +23,7 @@ public class TokenService {
 
     /**
      * 创建 Token
+     *
      * @param userId
      * @return
      */
@@ -31,17 +32,17 @@ public class TokenService {
         String token = TokenGenerator.generateValue();
 
         //判断是否生成过token
-        TokenEntity tokenEntity = getReidsToken(userId);
+        TokenEntity tokenEntity = getReidsToken(token);
         if (tokenEntity == null) {
             //保存token
             tokenEntity = new TokenEntity();
             tokenEntity.setUserId(userId);
             tokenEntity.setToken(token);
-            setReidsToken(userId, tokenEntity);
+            setReidsToken(token, tokenEntity);
         } else {
             //更新token
             tokenEntity.setToken(token);
-            setReidsToken(userId, tokenEntity);
+            setReidsToken(token, tokenEntity);
         }
 
 
@@ -50,26 +51,38 @@ public class TokenService {
 
 
     /**
-     * redis获取token
+     * Token 根据token获取 TokenEntity
      *
-     * @param userId
+     * @param token
      * @return
      */
-    private TokenEntity getReidsToken(long userId) {
-        return (TokenEntity) redisTemplate.opsForValue().get(PREFIX + userId);
+    public TokenEntity getTokenEntity(String token) {
+        TokenEntity tokenEntity = getReidsToken(token);
+        return tokenEntity;
+    }
+
+
+    /**
+     * redis获取token
+     *
+     * @param token
+     * @return
+     */
+    private TokenEntity getReidsToken(String token) {
+        return (TokenEntity) redisTemplate.opsForValue().get(PREFIX + token);
     }
 
 
     /**
      * redise设置token
      *
-     * @param userId
+     * @param token
      * @param tokenEntity
      */
-    private void setReidsToken(long userId, TokenEntity tokenEntity) {
-        redisTemplate.opsForValue().set(PREFIX + userId, tokenEntity);
+    private void setReidsToken(String token, TokenEntity tokenEntity) {
+        redisTemplate.opsForValue().set(PREFIX + token, tokenEntity);
         //60分钟过期
-        redisTemplate.expire(PREFIX + userId, EXPIRE, TimeUnit.MINUTES);
+        redisTemplate.expire(PREFIX + token, EXPIRE, TimeUnit.MINUTES);
     }
 
 

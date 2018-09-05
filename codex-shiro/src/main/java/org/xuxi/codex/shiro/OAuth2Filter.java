@@ -7,8 +7,6 @@ import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.web.filter.authc.AuthenticatingFilter;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.xuxi.codex.common.exceptions.CodeDefined;
-import org.xuxi.codex.common.exceptions.RException;
 import org.xuxi.codex.common.utils.HttpContextUtils;
 import org.xuxi.codex.common.utils.R;
 
@@ -49,15 +47,16 @@ public class OAuth2Filter extends AuthenticatingFilter {
         //获取请求token，如果token不存在，直接返回401
         String token = getRequestToken((HttpServletRequest) request);
         if (StringUtils.isBlank(token)) {
-//            HttpServletResponse httpResponse = (HttpServletResponse) response;
-//            httpResponse.setHeader("Access-Control-Allow-Credentials", "true");
-//            httpResponse.setHeader("Access-Control-Allow-Origin", HttpContextUtils.getOrigin());
-//
-//            String json = new Gson().toJson(R.error(HttpStatus.UNAUTHORIZED.toString(), "invalid token"));
-//
-//            httpResponse.getWriter().print(json);
+            HttpServletResponse httpResponse = (HttpServletResponse) response;
+            httpResponse.setHeader("Access-Control-Allow-Credentials", "true");
+            httpResponse.setHeader("Access-Control-Allow-Origin", HttpContextUtils.getOrigin());
 
-            throw new RException(CodeDefined.ERROR_TOKEN);
+            String json = new Gson().toJson(R.error(HttpStatus.UNAUTHORIZED.toString(), "invalid token"));
+
+            httpResponse.getWriter().print(json);
+
+//            throw new RException(CodeDefined.ERROR_TOKEN);
+            return false;
         }
 
         return executeLogin(request, response);

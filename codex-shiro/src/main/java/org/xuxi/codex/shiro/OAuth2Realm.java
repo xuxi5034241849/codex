@@ -16,10 +16,7 @@
 package org.xuxi.codex.shiro;
 
 
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -28,6 +25,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.xuxi.codex.db.entity.UserEntity;
 import org.xuxi.codex.db.service.UserService;
+import org.xuxi.codex.shiro.token.TokenEntity;
+import org.xuxi.codex.shiro.token.TokenService;
 
 /**
  * 认证
@@ -37,7 +36,7 @@ public class OAuth2Realm extends AuthorizingRealm {
 
 
     @Autowired
-    private UserService userService;
+    private TokenService tokenService;
 
 
 
@@ -50,20 +49,15 @@ public class OAuth2Realm extends AuthorizingRealm {
         String accessToken = (String) token.getPrincipal();
 
         //根据accessToken，查询用户信息
-        UserEntity userEntity = userService.getUserByName("admin");
-
-//        //token失效
-//        if(userEntity == null || userEntity.getExpireTime().getTime() < System.currentTimeMillis()){
-//            throw new IncorrectCredentialsException("token失效，请重新登录");
-//        }
+        TokenEntity tokenEntity = tokenService.getTokenEntity(accessToken);
 
 
-//        //账号锁定
-//        if(user.getStatus() == 0){
-//            throw new LockedAccountException("账号已被锁定,请联系管理员");
-//        }
+        //token失效
+        if(tokenEntity == null){
+            throw new IncorrectCredentialsException("token失效，请重新登录");
+        }
 
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(userEntity, accessToken, getName());
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(tokenEntity, accessToken, getName());
         return info;
     }
 
