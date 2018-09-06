@@ -16,15 +16,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static org.xuxi.codex.shiro.config.ShiroConfiguration.PREFIX;
-
-
 @Configuration
-@ConditionalOnProperty(prefix = PREFIX, name = "enabled", havingValue = "true")
 public class ShiroConfiguration {
-
-    public final static String PREFIX = "shiro";
-
 
     @Bean
     public OAuth2Realm oAuth2Realm() {

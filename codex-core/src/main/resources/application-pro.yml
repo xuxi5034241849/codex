@@ -21,6 +21,3 @@ spring:
 logging:
   level: debug
   level.org.xuxi.codex: debug
-
-shiro:
-  enabled: true
