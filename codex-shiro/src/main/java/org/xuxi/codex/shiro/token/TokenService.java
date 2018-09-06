@@ -3,6 +3,7 @@ package org.xuxi.codex.shiro.token;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.xuxi.codex.db.entity.UserEntity;
 import org.xuxi.codex.shiro.utils.TokenGenerator;
 
 import java.util.concurrent.TimeUnit;
@@ -27,10 +28,10 @@ public class TokenService {
     /**
      * 创建 Token
      *
-     * @param userId
+     * @param user
      * @return
      */
-    public String createToken(long userId) {
+    public String createToken(UserEntity user) {
         //生成一个token
         String token = TokenGenerator.generateValue();
 
@@ -39,7 +40,11 @@ public class TokenService {
         if (userContextInfo == null) {
             //保存token
             userContextInfo = new UserContextInfo();
-            userContextInfo.setUserId(userId);
+            userContextInfo.setUserId(user.getId());
+            userContextInfo.setEmail(user.getEmail());
+            userContextInfo.setName(user.getName());
+            userContextInfo.setTelephone(user.getTelephone());
+            userContextInfo.setUserName(user.getUserName());
             userContextInfo.setToken(token);
             setReidsToken(token, userContextInfo);
         } else {
@@ -96,6 +101,5 @@ public class TokenService {
         //60分钟过期
         redisTemplate.expire(PREFIX + token, EXPIRE, TimeUnit.MINUTES);
     }
-
 
 }

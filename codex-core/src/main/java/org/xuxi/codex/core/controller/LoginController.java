@@ -38,7 +38,7 @@ public class LoginController extends AbstractController {
             return R.error("账号或密码不正确");
         }
 
-        return R.ok().put("token", tokenService.createToken(user.getId()));
+        return R.ok().put("token", tokenService.createToken(user));
     }
 
 
