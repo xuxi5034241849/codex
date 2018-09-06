@@ -2,7 +2,10 @@ package org.xuxi.codex.db.entity;
 
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import org.xuxi.codex.common.valid.ValidGroup;
+import org.xuxi.codex.common.valid.ValidateMessage;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 /**
@@ -24,10 +27,12 @@ public class UserEntity implements Serializable {
 	/**
 	 * 用户名
 	 */
+	@NotBlank(message = ValidateMessage.NotBlank, groups = {ValidGroup.Login.class})
 	private String userName;
 	/**
 	 * 密码
 	 */
+	@NotBlank(message = ValidateMessage.NotBlank, groups = {ValidGroup.Login.class})
 	private String password;
 	/**
 	 * 姓名
