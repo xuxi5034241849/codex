@@ -1,5 +1,7 @@
 package org.xuxi.codex.shiro.token;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 
 
@@ -12,86 +14,30 @@ public class UserContextInfo implements Serializable {
     /**
      * oauth2 token
      */
+    @JsonIgnore
     private String token;
 
     /**
-     * 用户主体信息
+     * 用户ID
      */
-    private User user;
-
-    class User {
-
-        /**
-         * 用户ID
-         */
-        private Long userId;
-
-        /**
-         * 用户名
-         */
-        private String userName;
-        /**
-         * 姓名
-         */
-        private String name;
-        /**
-         * 邮箱
-         */
-        private String email;
-        /**
-         * 手机
-         */
-        private String telephone;
-
-    }
-
+    private Long userId;
 
     /**
-     * ------------------------下面是  get & set -------------------
-     *
-     * @return
+     * 用户名
      */
-
-    public Long getUserId() {
-        return user.userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.user.userId = userId;
-    }
-
-
-    public String getUserName() {
-        return user.userName;
-    }
-
-    public void setUserName(String userName) {
-        this.user.userName = userName;
-    }
-
-    public String getName() {
-        return user.name;
-    }
-
-    public void setName(String name) {
-        this.user.name = name;
-    }
-
-    public String getEmail() {
-        return user.email;
-    }
-
-    public void setEmail(String email) {
-        this.user.email = email;
-    }
-
-    public String getTelephone() {
-        return user.telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.user.telephone = telephone;
-    }
+    private String userName;
+    /**
+     * 姓名
+     */
+    private String name;
+    /**
+     * 邮箱
+     */
+    private String email;
+    /**
+     * 手机
+     */
+    private String telephone;
 
 
     public String getToken() {
@@ -102,14 +48,43 @@ public class UserContextInfo implements Serializable {
         this.token = token;
     }
 
-
-    public User getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-
-    public UserContextInfo() {
-        this.user = new User();
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
 }
