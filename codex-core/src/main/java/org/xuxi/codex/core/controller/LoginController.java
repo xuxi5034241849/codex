@@ -3,10 +3,7 @@ package org.xuxi.codex.core.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.xuxi.codex.common.utils.R;
 import org.xuxi.codex.common.valid.ValidGroup;
 import org.xuxi.codex.db.entity.UserEntity;
@@ -24,6 +21,12 @@ public class LoginController extends AbstractController {
     @Autowired
     private UserService userService;
 
+    /**
+     * 登陆
+     *
+     * @param userEntity
+     * @return
+     */
     @PostMapping("/login")
     public R login(@RequestBody @Validated(ValidGroup.Login.class) UserEntity userEntity) {
 
@@ -39,12 +42,29 @@ public class LoginController extends AbstractController {
     }
 
 
+    /**
+     * 获取上下文信息
+     *
+     * @return
+     */
+    @GetMapping("get-user")
+    public R getUserInfo() {
+
+        return R.ok().put("data", getUser());
+
+    }
+
+
+    /**
+     * 登出
+     *
+     * @return
+     */
     @PostMapping("/login/out")
     @ResponseBody
     public R out() {
 
-
-        System.out.println(getUser());
+        tokenService.cleanToken(getUser().getToken());
 
         return R.ok();
     }

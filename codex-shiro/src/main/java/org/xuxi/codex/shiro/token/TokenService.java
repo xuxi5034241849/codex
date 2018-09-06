@@ -8,6 +8,9 @@ import org.xuxi.codex.shiro.utils.TokenGenerator;
 import java.util.concurrent.TimeUnit;
 
 
+/**
+ * Token 登录集合
+ */
 @Service
 public class TokenService {
 
@@ -61,6 +64,15 @@ public class TokenService {
         return userContextInfo;
     }
 
+
+    /**
+     * 删除TOKEN
+     *
+     * @param token
+     */
+    public void cleanToken(String token) {
+        redisTemplate.delete(PREFIX + token);
+    }
 
     /**
      * redis获取token
