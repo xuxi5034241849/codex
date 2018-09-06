@@ -19,7 +19,7 @@ deploy_host_port=22
 
 
 deploy_jar="$deploy_project-$deploy_version.jar"
-upload_path="$WORKSPACE/$deploy_project/target/$deploy_jar"
+upload_path="$WORKSPACE/$deploy_project/build/libs/$deploy_jar"
 deploy_dir="/data/apps"
 
 # 备份目录
