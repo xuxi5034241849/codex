@@ -8,7 +8,7 @@ spring:
   redis:
     port: 6379
     host: localhost
-    password:
+    password: ${REDIS_PWD}
     database: 3
     timeout: 1s
     jedis:
