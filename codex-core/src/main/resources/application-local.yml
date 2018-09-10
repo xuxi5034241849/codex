@@ -2,7 +2,8 @@ spring:
   datasource:
       type: com.alibaba.druid.pool.DruidDataSource
       driverClassName: com.mysql.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/generator?useSSL=false
+      url: jdbc:mysql://localhost:3306/generator?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+
       username: ${DB_USERNAME}
       password: ${DB_PWD}
   redis:

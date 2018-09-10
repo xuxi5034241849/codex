@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.xuxi.codex.common.utils.R;
-import org.xuxi.codex.common.valid.ValidGroup;
+import org.xuxi.codex.common.valid.VG;
 import org.xuxi.codex.db.entity.UserEntity;
 import org.xuxi.codex.db.service.UserService;
 import org.xuxi.codex.shiro.token.TokenService;
@@ -28,7 +28,7 @@ public class LoginController extends AbstractController {
      * @return
      */
     @PostMapping("/login")
-    public R login(@RequestBody @Validated(ValidGroup.Login.class) UserEntity userEntity) {
+    public R login(@RequestBody @Validated(VG.Login.class) UserEntity userEntity) {
 
 
         UserEntity user = userService.getUserByName(userEntity.getUserName());

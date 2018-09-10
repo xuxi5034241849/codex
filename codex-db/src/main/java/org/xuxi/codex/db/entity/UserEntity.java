@@ -2,11 +2,12 @@ package org.xuxi.codex.db.entity;
 
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
-import org.xuxi.codex.common.valid.ValidGroup;
-import org.xuxi.codex.common.valid.ValidateMessage;
+import org.xuxi.codex.common.valid.VG;
+import org.xuxi.codex.common.valid.VM;
 
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 用户信息
@@ -27,12 +28,12 @@ public class UserEntity implements Serializable {
 	/**
 	 * 用户名
 	 */
-	@NotBlank(message = ValidateMessage.NotBlank, groups = {ValidGroup.Login.class})
+	@NotBlank(message = VM.NotBlank, groups = {VG.Login.class})
 	private String userName;
 	/**
 	 * 密码
 	 */
-	@NotBlank(message = ValidateMessage.NotBlank, groups = {ValidGroup.Login.class})
+	@NotBlank(message = VM.NotBlank, groups = {VG.Login.class})
 	private String password;
 	/**
 	 * 姓名
@@ -57,11 +58,11 @@ public class UserEntity implements Serializable {
 	/**
 	 * 创建时间
 	 */
-	private Integer createTime;
+	private Date createTime;
 	/**
 	 * 修改时间
 	 */
-	private Integer updateTime;
+	private Date updateTime;
 
 	/**
 	 * 设置：id
@@ -162,25 +163,25 @@ public class UserEntity implements Serializable {
 	/**
 	 * 设置：创建时间
 	 */
-	public void setCreateTime(Integer createTime) {
+	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
 	/**
 	 * 获取：创建时间
 	 */
-	public Integer getCreateTime() {
+	public Date getCreateTime() {
 		return createTime;
 	}
 	/**
 	 * 设置：修改时间
 	 */
-	public void setUpdateTime(Integer updateTime) {
+	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
 	/**
 	 * 获取：修改时间
 	 */
-	public Integer getUpdateTime() {
+	public Date getUpdateTime() {
 		return updateTime;
 	}
 }

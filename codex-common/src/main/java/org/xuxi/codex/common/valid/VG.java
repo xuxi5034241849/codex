@@ -5,7 +5,7 @@ package org.xuxi.codex.common.valid;
  *
  */
 @SuppressWarnings(value = "all")
-public interface ValidGroup {
+public interface VG {
 
     // 新增
     interface Add {
