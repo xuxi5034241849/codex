@@ -43,6 +43,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
         return super.insert(entity);
     }
 
+    @Override
+    public boolean updateById(UserEntity entity) {
+        entity.setUpdateTime(DateUtil.getTime());
+        return super.updateById(entity);
+    }
 
     @Override
     public void modifyPasswd(String userId, String oldPasswd, String passwd) {

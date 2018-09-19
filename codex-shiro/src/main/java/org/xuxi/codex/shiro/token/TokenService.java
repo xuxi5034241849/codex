@@ -35,28 +35,29 @@ public class TokenService {
         //生成一个token
         String token = TokenGenerator.generateValue();
 
-        //判断是否生成过token
-        UserContextInfo userContextInfo = getReidsToken(token);
-        if (userContextInfo == null) {
-            //保存token
-            userContextInfo = new UserContextInfo();
-            userContextInfo.setUserId(user.getId());
-            userContextInfo.setEmail(user.getEmail());
-            userContextInfo.setName(user.getName());
-            userContextInfo.setTelephone(user.getTelephone());
-            userContextInfo.setUserName(user.getUserName());
-            userContextInfo.setToken(token);
-            setReidsToken(token, userContextInfo);
-        } else {
-            //更新token
-            userContextInfo.setToken(token);
-            setReidsToken(token, userContextInfo);
-        }
+        return refreshToken(token, user);
+    }
 
+    /**
+     * 更新 Token 信息
+     *
+     * @param user
+     * @return
+     */
+    public String refreshToken(String token, UserEntity user) {
+
+        //保存token
+        UserContextInfo userContextInfo = new UserContextInfo();
+        userContextInfo.setUserId(user.getId());
+        userContextInfo.setEmail(user.getEmail());
+        userContextInfo.setName(user.getName());
+        userContextInfo.setTelephone(user.getTelephone());
+        userContextInfo.setUserName(user.getUserName());
+        userContextInfo.setToken(token);
+        setReidsToken(token, userContextInfo);
 
         return token;
     }
-
 
     /**
      * Token 根据token获取 UserContextInfo

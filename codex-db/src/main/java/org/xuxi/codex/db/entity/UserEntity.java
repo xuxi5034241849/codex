@@ -28,7 +28,7 @@ public class UserEntity implements Serializable {
      * id
      */
     @TableId(type = IdType.INPUT)
-    @NotBlank(groups = {VG.Passwd.class})
+    @NotBlank(groups = {VG.Passwd.class, VG.Update.class})
     private String id;
     /**
      * 用户名
@@ -58,12 +58,12 @@ public class UserEntity implements Serializable {
     /**
      * 邮箱
      */
-    @Email(groups = VG.Add.class)
+    @Email(groups = {VG.Add.class, VG.Update.class})
     private String email;
     /**
      * 手机
      */
-    @Pattern(regexp = "^1(\\d{10})$", groups = VG.Add.class)
+    @Pattern(regexp = "^1(\\d{10})$", groups = {VG.Add.class, VG.Update.class})
     private String telephone;
     /**
      * 扰乱码
