@@ -29,7 +29,7 @@ SPRINGBOOTAPP_PARAMS=$4
 SPRINGBOOTAPP_JAVA=java
 
 # JVM 运行参数
-VM_OPTS="-server -Xms128m -Xmx128m -Xss1M -XX:+UseParallelGC"
+VM_OPTS="-server -Xms128m -Xmx128m -Xss1M"
 # -XX:PermSize=512m -XX:MaxPermSize=1g
 # VM_OPTS="-Xmx6g -Xms6g -Xmn2g -XX:PermSize=512m -XX:MaxPermSize=1g -Xss1M -XX:+UseParNewGC -XX:+DisableExplicitGC -XX:+UseConcMarkSweepGC -XX:+CMSParallelRemarkEnabled -XX:+UseCMSCompactAtFullCollection -XX:LargePageSizeInBytes=128m -XX:+UseFastAccessorMethods -XX:+UseCMSInitiatingOccupancyOnly -XX:CMSInitiatingOccupancyFraction=70"
  MONITOR_OPTS="-Dcom.sun.management.jmxremote.port=9998
