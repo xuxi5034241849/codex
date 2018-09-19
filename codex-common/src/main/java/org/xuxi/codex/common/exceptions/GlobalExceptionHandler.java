@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.NoHandlerFoundException;
-import org.xuxi.codex.common.utils.R;
+import org.xuxi.codex.common.models.R;
 import org.xuxi.codex.common.utils.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;

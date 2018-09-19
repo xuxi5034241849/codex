@@ -1,15 +1,17 @@
 package org.xuxi.codex.db.entity;
 
+import com.alibaba.druid.pool.DruidDataSource;
+import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Length;
+import org.xuxi.codex.common.utils.RequestListEntity;
 import org.xuxi.codex.common.valid.VG;
-import org.xuxi.codex.common.valid.VM;
 
+import javax.sql.DataSource;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -21,45 +23,45 @@ import java.util.Date;
  * @date 2018-09-07 13:07:48
  */
 @TableName("data_source")
-public class DataSourceEntity implements Serializable {
+public class DataSourceEntity extends RequestListEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
      * 数据源ID
      */
-    @NotNull(message = VM.NotNull, groups = {VG.Update.class, VG.Delete.class, VG.Get.class})
+    @NotBlank(groups = {VG.Update.class, VG.Delete.class, VG.Get.class})
     @TableId(type = IdType.INPUT)
-    private Long id;
+    private String id;
 
     /**
      * 用户ID
      */
     @JsonIgnore
-    private Long userId;
+    private String userId;
 
     /**
      * 连接名
      */
-    @NotBlank(message = VM.NotBlank, groups = VG.Add.class)
-    @Length(max = 20, message = VM.Max, groups = {VG.Add.class, VG.Update.class})
+    @NotBlank( groups = VG.Add.class)
+    @Length(max = 20, groups = {VG.Add.class, VG.Update.class})
     private String name;
     /**
      * 链接URL
      */
-    @NotBlank(message = VM.NotBlank, groups = VG.Add.class)
-    @Length(max = 200, message = VM.Max, groups = {VG.Add.class, VG.Update.class})
+    @NotBlank(groups = VG.Add.class)
+    @Length(max = 200, groups = {VG.Add.class, VG.Update.class})
     private String url;
     /**
      * 用户名
      */
-    @NotBlank(message = VM.NotBlank, groups = VG.Add.class)
-    @Length(max = 50, message = VM.Max, groups = {VG.Add.class, VG.Update.class})
+    @NotBlank(groups = VG.Add.class)
+    @Length(max = 50, groups = {VG.Add.class, VG.Update.class})
     private String username;
     /**
      * 密码
      */
-    @NotBlank(message = VM.NotBlank, groups = VG.Add.class)
-    @Length(max = 50, message = VM.Max, groups = {VG.Add.class, VG.Update.class})
+    @NotBlank(groups = VG.Add.class)
+    @Length(max = 50, groups = {VG.Add.class, VG.Update.class})
     private String passwd;
     /**
      * 是否扰乱的 1：正常的 2:扰乱的
@@ -75,12 +77,12 @@ public class DataSourceEntity implements Serializable {
      */
     private Date updateTime;
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
@@ -146,11 +148,28 @@ public class DataSourceEntity implements Serializable {
     }
 
 
-    public Long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+
+    /**
+     * 构建数据源 DataSource
+     *
+     * @return
+     */
+    public DataSource buildDataSource() {
+        DruidDataSource druidDataSource = DruidDataSourceBuilder.create().build();
+        druidDataSource.setUrl(this.url);
+        druidDataSource.setUsername(this.username);
+        druidDataSource.setPassword(this.passwd);
+        druidDataSource.setDriverClassName("com.mysql.jdbc.Driver");
+        druidDataSource.setBreakAfterAcquireFailure(true);
+        druidDataSource.setFailFast(true);
+        return druidDataSource;
     }
 }

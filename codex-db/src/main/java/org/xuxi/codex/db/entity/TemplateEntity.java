@@ -7,7 +7,6 @@ import com.baomidou.mybatisplus.enums.IdType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.xuxi.codex.common.valid.VG;
-import org.xuxi.codex.common.valid.VM;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -27,23 +26,23 @@ public class TemplateEntity implements Serializable {
     /**
      * ID
      */
-    @NotNull(message = VM.NotNull, groups = VG.Get.class)
+    @NotBlank( groups = VG.Get.class)
     @TableId(type = IdType.INPUT)
-    private Long templateId;
+    private String templateId;
     /**
      * 用户ID
      */
     @JsonIgnore
-    private Long userId;
+    private String userId;
     /**
      * 模板名称
      */
-    @NotNull(message = VM.NotNull, groups = Template1.class)
+    @NotNull(groups = Template1.class)
     private String templateName;
     /**
      * 模板类型 1：CRUD
      */
-    @NotNull(message = VM.NotNull, groups = VG.List.class)
+    @NotNull(groups = VG.List.class)
     private Integer type;
     /**
      * 创建时间
@@ -53,35 +52,35 @@ public class TemplateEntity implements Serializable {
 
     //---------------以下为 扩展 字段------------------
 
-    @NotBlank(message = VM.NotBlank, groups = Template1.class)
+    @NotBlank( groups = Template1.class)
     @TableField(exist = false)
-    private String entity;
+    private String entityPackagePath;
 
-    @NotBlank(message = VM.NotBlank, groups = Template1.class)
+    @NotBlank( groups = Template1.class)
     @TableField(exist = false)
-    private String mapper;
+    private String mapperPackagePath;
 
-    @NotBlank(message = VM.NotBlank, groups = Template1.class)
+    @NotBlank( groups = Template1.class)
     @TableField(exist = false)
-    private String service;
+    private String servicePackagePath;
 
-    @NotBlank(message = VM.NotBlank, groups = Template1.class)
+    @NotBlank( groups = Template1.class)
     @TableField(exist = false)
-    private String serviceImpl;
+    private String serviceImplPackagePath;
 
-    @NotBlank(message = VM.NotBlank, groups = Template1.class)
+    @NotBlank( groups = Template1.class)
     @TableField(exist = false)
-    private String mapperXML;
+    private String mapperXmlPackagePath;
 
 
     public interface Template1 {
     }
 
-    public void setTemplateId(Long templateId) {
+    public void setTemplateId(String templateId) {
         this.templateId = templateId;
     }
 
-    public Long getTemplateId() {
+    public String getTemplateId() {
         return templateId;
     }
 
@@ -109,51 +108,51 @@ public class TemplateEntity implements Serializable {
         return createTime;
     }
 
-    public String getEntity() {
-        return entity;
+    public String getEntityPackagePath() {
+        return entityPackagePath;
     }
 
-    public void setEntity(String entity) {
-        this.entity = entity;
+    public void setEntityPackagePath(String entityPackagePath) {
+        this.entityPackagePath = entityPackagePath;
     }
 
-    public String getMapper() {
-        return mapper;
+    public String getMapperPackagePath() {
+        return mapperPackagePath;
     }
 
-    public void setMapper(String mapper) {
-        this.mapper = mapper;
+    public void setMapperPackagePath(String mapperPackagePath) {
+        this.mapperPackagePath = mapperPackagePath;
     }
 
-    public String getService() {
-        return service;
+    public String getServicePackagePath() {
+        return servicePackagePath;
     }
 
-    public void setService(String service) {
-        this.service = service;
+    public void setServicePackagePath(String servicePackagePath) {
+        this.servicePackagePath = servicePackagePath;
     }
 
-    public String getServiceImpl() {
-        return serviceImpl;
+    public String getServiceImplPackagePath() {
+        return serviceImplPackagePath;
     }
 
-    public void setServiceImpl(String serviceImpl) {
-        this.serviceImpl = serviceImpl;
+    public void setServiceImplPackagePath(String serviceImplPackagePath) {
+        this.serviceImplPackagePath = serviceImplPackagePath;
     }
 
-    public String getMapperXML() {
-        return mapperXML;
+    public String getMapperXmlPackagePath() {
+        return mapperXmlPackagePath;
     }
 
-    public void setMapperXML(String mapperXML) {
-        this.mapperXML = mapperXML;
+    public void setMapperXmlPackagePath(String mapperXmlPackagePath) {
+        this.mapperXmlPackagePath = mapperXmlPackagePath;
     }
 
-    public Long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 }

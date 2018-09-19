@@ -7,8 +7,8 @@ import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.web.filter.authc.AuthenticatingFilter;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.xuxi.codex.common.models.R;
 import org.xuxi.codex.common.utils.HttpContextUtils;
-import org.xuxi.codex.common.utils.R;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;

@@ -10,13 +10,14 @@ import org.xuxi.codex.db.mapper.DataSourceMapper;
 import org.xuxi.codex.db.service.DataSourceService;
 
 import java.util.List;
+import java.util.Map;
 
 
 @Service("dataSourceService")
 public class DataSourceServiceImpl extends ServiceImpl<DataSourceMapper, DataSourceEntity> implements DataSourceService {
 
 
-    public List<DataSourceEntity> getListByUser(Long userId) {
+    public List<DataSourceEntity> getListByUser(String userId) {
         EntityWrapper<DataSourceEntity> wrapper = new EntityWrapper<>();
         wrapper.eq("user_id", userId);
         return baseMapper.selectList(wrapper);
@@ -36,4 +37,14 @@ public class DataSourceServiceImpl extends ServiceImpl<DataSourceMapper, DataSou
         entity.setUpdateTime(DateUtil.getTime());
         return super.updateById(entity);
     }
+
+
+    public List<Map<String, Object>> queryTableList(Map<String, Object> map) {
+        return baseMapper.queryTableList(map);
+    }
+
+    public int queryTableTotal(Map<String, Object> map) {
+        return baseMapper.queryTableTotal(map);
+    }
+
 }

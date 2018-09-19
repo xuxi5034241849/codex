@@ -1,15 +1,42 @@
 spring:
   datasource:
-      type: com.alibaba.druid.pool.DruidDataSource
-      driverClassName: com.mysql.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/generator?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+          type: com.alibaba.druid.pool.DruidDataSource
+          driverClassName: com.mysql.jdbc.Driver
+          druid:
+              default:  #数据源1
+                  url: ${DB_URL:jdbc:mysql://localhost:3306/generator?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false}
+                  username: ${DB_USERNAME}
+                  password: ${DB_PWD}
+              initial-size: 10
+              max-active: 100
+              min-idle: 10
+              max-wait: 60000
+              pool-prepared-statements: true
+              max-pool-prepared-statement-per-connection-size: 20
+              time-between-eviction-runs-millis: 60000
+              min-evictable-idle-time-millis: 300000
+              #validation-query: SELECT 1
+              test-while-idle: true
+              test-on-borrow: false
+              test-on-return: false
+              stat-view-servlet:
+                  enabled: true
+                  url-pattern: /druid/*
+                  #login-username: admin
+                  #login-password: admin
+              filter:
+                  stat:
+                      log-slow-sql: true
+                      slow-sql-millis: 1000
+                      merge-sql: true
+                  wall:
+                      config:
+                          multi-statement-allow: true
 
-      username: ${DB_USERNAME}
-      password: ${DB_PWD}
   redis:
     port: 6379
-    host: localhost
-    password:
+    host: ${REDIS_IP:localhost}
+    password: ${REDIS_PWD}
     database: 3
     timeout: 1s
     jedis:

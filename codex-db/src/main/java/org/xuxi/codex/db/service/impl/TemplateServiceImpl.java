@@ -26,7 +26,7 @@ public class TemplateServiceImpl extends ServiceImpl<TemplateMapper, TemplateEnt
 
     @Transactional
     @Override
-    public Long addTemplateConfig(Long userId, TemplateEntity templateEntity, List<TemplateKeyConfigEntity> templateKeyConfigEntityList) {
+    public String addTemplateConfig(String userId, TemplateEntity templateEntity, List<TemplateKeyConfigEntity> templateKeyConfigEntityList) {
 
         templateEntity.setTemplateId(SnowflakeIdWorker.getId());
         templateEntity.setCreateTime(DateUtil.getTime());
@@ -47,7 +47,7 @@ public class TemplateServiceImpl extends ServiceImpl<TemplateMapper, TemplateEnt
 
 
     @Override
-    public Map<String, String> getConfig(Long templateId) {
+    public Map<String, String> getConfig(String templateId) {
 
         Map<String, String> result = new LinkedHashMap<>();
 
@@ -62,7 +62,7 @@ public class TemplateServiceImpl extends ServiceImpl<TemplateMapper, TemplateEnt
     }
 
     @Override
-    public List<TemplateEntity> getTemplateList(Long userId, int type) {
+    public List<TemplateEntity> getTemplateList(String userId, int type) {
         EntityWrapper<TemplateEntity> wrapper = new EntityWrapper<>();
         wrapper.eq("user_id", userId)
                 .eq("type", type);

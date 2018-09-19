@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.service.IService;
 import org.xuxi.codex.db.entity.DataSourceEntity;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -21,7 +22,23 @@ public interface DataSourceService extends IService<DataSourceEntity> {
      * @param userId
      * @return
      */
-    List<DataSourceEntity> getListByUser(Long userId);
+    List<DataSourceEntity> getListByUser(String userId);
+
+
+    /**
+     * 查询数据源下所有的表信息
+     * @param map
+     * @return
+     */
+    List<Map<String, Object>> queryTableList(Map<String, Object> map);
+
+    /**
+     * 查询数据源下所有的表
+     * @param map
+     * @return
+     */
+    int queryTableTotal(Map<String, Object> map);
+
 
 }
 

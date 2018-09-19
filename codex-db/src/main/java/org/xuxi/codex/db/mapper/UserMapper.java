@@ -1,7 +1,7 @@
 package org.xuxi.codex.db.mapper;
 
-import org.xuxi.codex.db.entity.UserEntity;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import org.xuxi.codex.db.entity.UserEntity;
 
 /**
  * 用户信息

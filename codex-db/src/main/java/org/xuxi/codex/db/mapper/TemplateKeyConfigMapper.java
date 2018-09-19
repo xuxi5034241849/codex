@@ -1,7 +1,7 @@
 package org.xuxi.codex.db.mapper;
 
-import org.xuxi.codex.db.entity.TemplateKeyConfigEntity;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import org.xuxi.codex.db.entity.TemplateKeyConfigEntity;
 
 /**
  * 模板字段自定义

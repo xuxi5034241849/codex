@@ -46,7 +46,7 @@ public class CommonConstant {
 
 
     /**
-     * 是否有效
+     * 模板类型
      */
     public enum TemplateType implements IEnum<Integer, String> {
         CRUD(1, "CRUD");
@@ -68,5 +68,32 @@ public class CommonConstant {
         }
 
     }
+
+
+    /**
+     * 用户类型
+     */
+    public enum UserType implements IEnum<Integer, String> {
+        Admin(0, "管理员"),
+        Ordinary(2, "普通用户");
+
+        Integer value;
+        String desc;
+
+        UserType(Integer value, String desc) {
+            this.value = value;
+            this.desc = desc;
+        }
+
+        public Integer getValue() {
+            return value;
+        }
+
+        public String getDesc() {
+            return desc;
+        }
+
+    }
+
 
 }

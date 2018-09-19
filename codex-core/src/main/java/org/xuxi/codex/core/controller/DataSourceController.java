@@ -2,14 +2,16 @@ package org.xuxi.codex.core.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.xuxi.codex.common.utils.R;
+import org.springframework.web.bind.annotation.*;
+import org.xuxi.codex.common.exceptions.CodeDefined;
+import org.xuxi.codex.common.models.R;
 import org.xuxi.codex.common.valid.VG;
+import org.xuxi.codex.db.conf.datasources.DynamicDataSource;
 import org.xuxi.codex.db.entity.DataSourceEntity;
 import org.xuxi.codex.db.service.DataSourceService;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 数据源链接信息配置接口
@@ -20,6 +22,11 @@ public class DataSourceController extends AbstractController {
 
     @Autowired
     private DataSourceService dataSourceService;
+
+
+
+    @Autowired
+    private DynamicDataSource dynamicDataSource;
 
 
     /**
@@ -90,5 +97,34 @@ public class DataSourceController extends AbstractController {
 
         return R.ok();
     }
+
+    /**
+     * 列表
+     */
+    @ResponseBody
+    @PostMapping("/get-table-list")
+    public R table(@Validated(VG.Get.class) @RequestBody DataSourceEntity dataSourceEntity) {
+
+        try {
+
+
+
+            dynamicDataSource.setDataSource(dataSourceEntity.getId());
+
+            List<Map<String, Object>> list = dataSourceService.queryTableList(null);
+
+            dynamicDataSource.clearDataSource();
+
+            return R.ok().data(list);
+
+        } catch (Exception e) {
+            return R.error(CodeDefined.CODE_5001); //连接不是动态数据源
+        } finally {
+            dynamicDataSource.clearDataSource();
+        }
+
+
+    }
+
 
 }

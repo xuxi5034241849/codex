@@ -3,6 +3,7 @@ package org.xuxi.codex.stream.stream;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.xuxi.codex.db.conf.datasources.DynamicDataSource;
 import org.xuxi.codex.db.service.SysGeneratorService;
 import org.xuxi.codex.stream.TableCodexTemplate;
 
@@ -24,21 +25,31 @@ public class TableCodexTemplateStream {
     @Autowired
     private SysGeneratorService sysGeneratorService;
 
+    @Autowired
+    private DynamicDataSource dynamicDataSource;
+
+
 
     /**
      * foreach template
      *
      * @param tableName
      */
-    public byte[] doTemplate(String tableName) {
+    public byte[] doTemplate(String tableName, String dataSourceId) {
 
         // 压缩包
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         ZipOutputStream zip = new ZipOutputStream(outputStream);
 
+        // 切换数据源
+        dynamicDataSource.setDataSource(dataSourceId);
+
         // 表&列信息
         Map<String, String> table = getTable(tableName);
         List<Map<String, String>> columns = getColumns(tableName);
+
+        // 还原数据源
+        dynamicDataSource.clearDataSource();
 
         //遍历
         tableCodexTemplateList.stream().forEach(tableCodexTemplate -> {

@@ -24,8 +24,8 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.xuxi.codex.db.entity.UserEntity;
-import org.xuxi.codex.shiro.token.UserContextInfo;
 import org.xuxi.codex.shiro.token.TokenService;
+import org.xuxi.codex.shiro.token.UserContextInfo;
 
 /**
  * 认证

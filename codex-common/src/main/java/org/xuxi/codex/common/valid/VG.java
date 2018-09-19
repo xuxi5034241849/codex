@@ -2,7 +2,6 @@ package org.xuxi.codex.common.valid;
 
 /**
  * 使用jsr-bean验证规范
- *
  */
 @SuppressWarnings(value = "all")
 public interface VG {
@@ -33,6 +32,41 @@ public interface VG {
 
     // 登录
     interface Login {
+    }
+
+    // 密码
+    interface Passwd{
+
+    }
+
+    // 验证
+    interface Valid {
+
+    }
+
+    // 验证1
+    interface Valid1 {
+
+    }
+
+    // 验证2
+    interface Vali2 {
+
+    }
+
+    // 验证3
+    interface Valid3 {
+
+    }
+
+    // 验证4
+    interface Valid4 {
+
+    }
+
+    // 验证5
+    interface Valid5 {
+
     }
 
 

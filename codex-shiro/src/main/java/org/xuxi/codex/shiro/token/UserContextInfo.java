@@ -20,7 +20,7 @@ public class UserContextInfo implements Serializable {
     /**
      * 用户ID
      */
-    private Long userId;
+    private String userId;
 
     /**
      * 用户名
@@ -48,11 +48,11 @@ public class UserContextInfo implements Serializable {
         this.token = token;
     }
 
-    public Long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

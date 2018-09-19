@@ -5,8 +5,8 @@ public class SnowflakeIdWorker {
 
     public static SnowflakeIdWorker snowflakeIdWorker = new SnowflakeIdWorker(1, 1);
 
-    public static long getId() {
-        return snowflakeIdWorker.nextId();
+    public static String getId() {
+        return snowflakeIdWorker.nextId().toString();
     }
 
     // ==============================Fields===========================================
@@ -106,7 +106,7 @@ public class SnowflakeIdWorker {
      *
      * @return SnowflakeId
      */
-    public synchronized long nextId() {
+    public synchronized Long nextId() {
         long timestamp = timeGen();
 
         //如果当前时间小于上一次ID生成的时间戳，说明系统时钟回退过这个时候应当抛出异常
@@ -163,14 +163,14 @@ public class SnowflakeIdWorker {
     }
 
     //==============================Test=============================================
-
-    /**
-     * 测试
-     */
-    public static void main(String[] args) {
-        for (int i = 0; i < 50000; i++) {
-            long id = SnowflakeIdWorker.getId();
-            System.out.println(id);
-        }
-    }
+//
+//    /**
+//     * 测试
+//     */
+//    public static void main(String[] args) {
+//        for (int i = 0; i < 50000; i++) {
+//            long id = SnowflakeIdWorker.getId();
+//            System.out.println(id);
+//        }
+//    }
 }

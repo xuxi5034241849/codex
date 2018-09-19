@@ -3,6 +3,8 @@ package org.xuxi.codex.core.controller;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.xuxi.codex.context.PropertiesContext;
 import org.xuxi.codex.stream.stream.TableCodexTemplateStream;
@@ -23,15 +25,17 @@ public class SysGeneratorController {
     /**
      * 生成代码
      */
-    @RequestMapping("/code")
-    public void code(HttpServletResponse response, String tableName) throws IOException {
+    @GetMapping("/code/{dataSourceId}/{tableName}/{templateId}")
+    public void code(HttpServletResponse response, @PathVariable String dataSourceId, @PathVariable String tableName, @PathVariable String templateId) throws IOException {
 
-        PropertiesContext.build();
+        PropertiesContext.build(templateId);
 
-        byte[] data = tableCodexTemplateStream.doTemplate(tableName);
+        byte[] data = tableCodexTemplateStream.doTemplate(tableName, dataSourceId);
+
         response.reset();
-        response.setHeader("Content-Disposition", "attachment; filename=\"" + tableName+".zip\"");
+        response.setHeader("Content-Disposition", "attachment; filename=\"" + tableName + ".zip\"");
         response.addHeader("Content-Length", "" + data.length);
+        response.addHeader("Access-Control-Allow-Origin", "*");
         response.setContentType("application/octet-stream; charset=UTF-8");
         IOUtils.write(data, response.getOutputStream());
     }

@@ -24,5 +24,13 @@ public interface UserService extends IService<UserEntity> {
     UserEntity getUserByName(String userName);
 
 
+
+    /**
+     * 修改密码
+     * @param userId 用户ID
+     * @param oldPasswd 旧密码
+     * @param passwd 新密码
+     */
+    void modifyPasswd(String userId, String oldPasswd, String passwd);
 }
 

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.xuxi.codex.common.constant.CommonConstant;
-import org.xuxi.codex.common.utils.R;
+import org.xuxi.codex.common.models.R;
 import org.xuxi.codex.common.valid.VG;
 import org.xuxi.codex.db.entity.TemplateEntity;
 import org.xuxi.codex.db.entity.TemplateKeyConfigEntity;
@@ -37,11 +37,11 @@ public class TemplateController extends AbstractController {
     public R putConfig(@RequestBody @Validated(value = TemplateEntity.Template1.class) TemplateEntity templateEntity) {
 
         List<TemplateKeyConfigEntity> templateKeyConfigEntitiesList = new ArrayList();
-        templateKeyConfigEntitiesList.add(new TemplateKeyConfigEntity("entity", templateEntity.getEntity()));
-        templateKeyConfigEntitiesList.add(new TemplateKeyConfigEntity("mapper", templateEntity.getMapper()));
-        templateKeyConfigEntitiesList.add(new TemplateKeyConfigEntity("service", templateEntity.getService()));
-        templateKeyConfigEntitiesList.add(new TemplateKeyConfigEntity("serviceImpl", templateEntity.getServiceImpl()));
-        templateKeyConfigEntitiesList.add(new TemplateKeyConfigEntity("mapperXML", templateEntity.getMapperXML()));
+        templateKeyConfigEntitiesList.add(new TemplateKeyConfigEntity("entityPackagePath", templateEntity.getEntityPackagePath()));
+        templateKeyConfigEntitiesList.add(new TemplateKeyConfigEntity("mapperPackagePath", templateEntity.getMapperPackagePath()));
+        templateKeyConfigEntitiesList.add(new TemplateKeyConfigEntity("servicePackagePath", templateEntity.getServicePackagePath()));
+        templateKeyConfigEntitiesList.add(new TemplateKeyConfigEntity("serviceImplPackagePath", templateEntity.getServiceImplPackagePath()));
+        templateKeyConfigEntitiesList.add(new TemplateKeyConfigEntity("mapperXmlPackagePath", templateEntity.getMapperXmlPackagePath()));
 
         templateEntity.setType(CommonConstant.TemplateType.CRUD.getValue());
 

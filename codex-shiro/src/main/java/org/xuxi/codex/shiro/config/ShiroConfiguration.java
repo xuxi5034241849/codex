@@ -5,7 +5,6 @@ import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.xuxi.codex.shiro.OAuth2Filter;
@@ -57,6 +56,8 @@ public class ShiroConfiguration {
         Map<String, String> filterMap = new LinkedHashMap<>();
 
         filterMap.put("/login", "anon");
+        filterMap.put("/register", "anon");
+        filterMap.put("/valid/*/*", "anon");
         filterMap.put("/**", "oauth2");
 
         filterMap.put("/webjars/**", "anon");

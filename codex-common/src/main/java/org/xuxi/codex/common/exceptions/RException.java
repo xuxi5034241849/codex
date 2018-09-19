@@ -6,7 +6,7 @@ package org.xuxi.codex.common.exceptions;
 public class RException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
-    private String code;
+    private String code = CodeDefined.ERROR.getValue();
     private String msg;
 
     public RException(String msg) {

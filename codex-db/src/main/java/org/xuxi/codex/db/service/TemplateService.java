@@ -24,7 +24,7 @@ public interface TemplateService extends IService<TemplateEntity> {
      * @param templateEntity
      * @return
      */
-    Long addTemplateConfig(Long userId, TemplateEntity templateEntity, List<TemplateKeyConfigEntity> templateKeyConfigEntityList);
+    String addTemplateConfig(String userId, TemplateEntity templateEntity, List<TemplateKeyConfigEntity> templateKeyConfigEntityList);
 
 
     /**
@@ -33,7 +33,7 @@ public interface TemplateService extends IService<TemplateEntity> {
      * @param templateId
      * @return
      */
-    Map<String, String> getConfig(Long templateId);
+    Map<String, String> getConfig(String templateId);
 
 
     /**
@@ -43,6 +43,6 @@ public interface TemplateService extends IService<TemplateEntity> {
      * @param type
      * @return
      */
-    List<TemplateEntity> getTemplateList(Long userId, int type);
+    List<TemplateEntity> getTemplateList(String userId, int type);
 }
 

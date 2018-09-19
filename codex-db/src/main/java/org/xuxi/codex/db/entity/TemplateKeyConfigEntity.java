@@ -21,16 +21,16 @@ public class TemplateKeyConfigEntity implements Serializable {
      * ID
      */
     @TableId(type = IdType.INPUT)
-    private Long id;
+    private String id;
     /**
      * 用户ID
      */
-    private Long userId;
+    private String userId;
 
     /**
      * 模板ID
      */
-    private Long templateId;
+    private String templateId;
 
     /**
      * 标题
@@ -50,19 +50,19 @@ public class TemplateKeyConfigEntity implements Serializable {
     private String desc;
 
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
-    public Long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
@@ -98,11 +98,11 @@ public class TemplateKeyConfigEntity implements Serializable {
         return desc;
     }
 
-    public Long getTemplateId() {
+    public String getTemplateId() {
         return templateId;
     }
 
-    public void setTemplateId(Long templateId) {
+    public void setTemplateId(String templateId) {
         this.templateId = templateId;
     }
 

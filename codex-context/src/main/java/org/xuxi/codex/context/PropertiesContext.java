@@ -2,8 +2,9 @@ package org.xuxi.codex.context;
 
 
 import org.xuxi.codex.common.utils.DateUtil;
+import org.xuxi.codex.common.utils.SpringContextUtil;
+import org.xuxi.codex.db.service.TemplateService;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -45,9 +46,9 @@ public class PropertiesContext {
      *
      * @return
      */
-    public static PropertiesContext build() {
+    public static PropertiesContext build(String templateId) {
 
-        threadLocalContext.set(new PropertiesContext());
+        threadLocalContext.set(new PropertiesContext(templateId));
 
         return threadLocalContext.get();
     }
@@ -55,18 +56,12 @@ public class PropertiesContext {
     /**
      * 私有构造方法
      */
-    private PropertiesContext() {
-        this.propertiesMap = new LinkedHashMap();
-        this.propertiesMap.put("entityPackagePath", "org.xuxi.codex.db.entity");
-        this.propertiesMap.put("mapperPackagePath", "org.xuxi.codex.db.mapper");
-        this.propertiesMap.put("servicePackagePath", "org.xuxi.codex.db.service");
-        this.propertiesMap.put("serviceImplPackagePath", "org.xuxi.codex.db.service.impl");
-        this.propertiesMap.put("mapperXmlPackagePath", "mapper");
+    private PropertiesContext(String templateId) {
+
+        this.propertiesMap = SpringContextUtil.getBean(TemplateService.class).getConfig(templateId);
         this.propertiesMap.put("email", "461720498@qq.com");
         this.propertiesMap.put("datetime", DateUtil.getDateTime());
         this.propertiesMap.put("author", "xuxi");
-
-
     }
 
 

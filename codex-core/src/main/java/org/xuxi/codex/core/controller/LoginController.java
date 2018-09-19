@@ -4,7 +4,7 @@ package org.xuxi.codex.core.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.xuxi.codex.common.utils.R;
+import org.xuxi.codex.common.models.R;
 import org.xuxi.codex.common.valid.VG;
 import org.xuxi.codex.db.entity.UserEntity;
 import org.xuxi.codex.db.service.UserService;
@@ -65,6 +65,53 @@ public class LoginController extends AbstractController {
     public R out() {
 
         tokenService.cleanToken(getUser().getToken());
+
+        return R.ok();
+    }
+
+
+    /**
+     * 注册
+     *
+     * @return
+     */
+    @PostMapping("/register")
+    @ResponseBody
+    public R register(@RequestBody @Validated(VG.Add.class) UserEntity userEntity) {
+
+        userService.insert(userEntity);
+
+        return R.ok();
+    }
+
+
+    /**
+     * 修改密码
+     *
+     * @return
+     */
+    @PostMapping("/passwd/modify")
+    @ResponseBody
+    public R modifyPasswd(@RequestBody @Validated(VG.Passwd.class) UserEntity userEntity) {
+
+        userService.modifyPasswd(userEntity.getId(), userEntity.getOldPassword(), userEntity.getPassword());
+
+        return R.ok();
+    }
+
+
+    /**
+     * 检查名用户是否重复
+     *
+     * @return
+     */
+    @GetMapping("/valid/user/{userName}")
+    @ResponseBody
+    public R validUser(@PathVariable String userName) {
+
+        if (userService.getUserByName(userName) != null) {
+            return R.valid("用户名重复");
+        }
 
         return R.ok();
     }
