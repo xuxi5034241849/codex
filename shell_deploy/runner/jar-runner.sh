@@ -9,7 +9,7 @@ start(){
  now=`date "+%Y-%m-%d_%H:%M:%S"`
  #exec java -Xms1024m -Xmx2048m -jar $1 5 &
  mkdir -p "$1/deploy_log"
- VM_OPTS="-server -Xms128m -Xmx128m -Xss1M -XX:+UseParallelGC"
+ VM_OPTS="-server -Xms128m -Xmx128m -Xss1M"
 # -XX:PermSize=512m -XX:MaxPermSize=1g
 # VM_OPTS="-Xmx6g -Xms6g -Xmn2g -XX:PermSize=512m -XX:MaxPermSize=1g -Xss1M -XX:+UseParNewGC -XX:+DisableExplicitGC -XX:+UseConcMarkSweepGC -XX:+CMSParallelRemarkEnabled -XX:+UseCMSCompactAtFullCollection -XX:LargePageSizeInBytes=128m -XX:+UseFastAccessorMethods -XX:+UseCMSInitiatingOccupancyOnly -XX:CMSInitiatingOccupancyFraction=70"
 
