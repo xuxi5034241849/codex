@@ -1,3 +1,5 @@
+group 'org.xuxi.codex'
+
 buildscript {
     ext {
         springBootVersion = '2.0.4.RELEASE'
@@ -19,8 +21,6 @@ def bootProjects = [project(':codex-core')]
 
 
 configure(javaProjects) {
-
-    group 'org.xuxi.codex'
     version '1.0.0'
 
     apply plugin: 'java'

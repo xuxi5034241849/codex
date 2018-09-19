@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 import org.xuxi.codex.common.exceptions.CodeDefined;
 import org.xuxi.codex.common.exceptions.RException;
+import org.xuxi.codex.common.utils.SpringContextUtil;
 import org.xuxi.codex.db.entity.DataSourceEntity;
 import org.xuxi.codex.db.service.DataSourceService;
 
@@ -17,9 +18,6 @@ import java.util.Map;
 public class DynamicDataSource extends AbstractRoutingDataSource {
 
     private static final ThreadLocal<String> contextHolder = new ThreadLocal<>();
-
-    @Autowired
-    private DataSourceService dataSourceService;
 
 
     private DataSource defaultTargetDataSource;
@@ -63,8 +61,7 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
      */
     public void setDataSource(String dataSourceId) {
 
-
-        DataSourceEntity dataSourceEntity = dataSourceService.selectById(dataSourceId);
+        DataSourceEntity dataSourceEntity = SpringContextUtil.getBean(DataSourceService.class).selectById(dataSourceId);
 
         if (dataSourceEntity == null) {
             throw new RException(CodeDefined.CODE_5002);
