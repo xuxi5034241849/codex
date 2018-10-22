@@ -4,7 +4,7 @@ spring:
           driverClassName: com.mysql.jdbc.Driver
           druid:
               default:  #数据源1
-                  url: jdbc:mysql://localhost:3306/codex?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+                  url: ${DB_URL:jdbc:mysql://localhost:3306/generator?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false}
                   username: ${DB_USERNAME}
                   password: ${DB_PWD}
               initial-size: 10

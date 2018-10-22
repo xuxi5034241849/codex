@@ -1,5 +1,6 @@
 package org.xuxi.codex.db.conf.datasources;
 
+import com.alibaba.druid.pool.DruidDataSource;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 import org.xuxi.codex.common.exceptions.CodeDefined;
 import org.xuxi.codex.common.exceptions.RException;
@@ -56,6 +57,8 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
         targetDataSources.put(DataSourceNames.DYNAMIC, dataSourceEntity.buildDataSource()); // 设置动态数据源
 
         contextHolder.set(DataSourceNames.DYNAMIC); // 使用动态数据源.
+
+        super.afterPropertiesSet();
     }
 
     /**
